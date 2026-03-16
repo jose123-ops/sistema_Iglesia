@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Información del Miembro</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<ion-card >
+
+<ion-card-header>
+  <ion-card-title>
+    {{miembro.nombres}} {{miembro.apellido1}} {{miembro.apellido2}}
+  </ion-card-title>
+</ion-card-header>
+
+<ion-card-content>
+
+<p><b>Cédula:</b> {{miembro.cedula}}</p>
+<p><b>Nacionalidad:</b> {{miembro.nacionalidad}}</p>
+<p><b>Sociedad:</b> {{miembro.sociedad}}</p>
+<p><b>Estado Civil:</b> {{miembro.estadoCivil}}</p>
+<p><b>Número de hijos:</b> {{miembro.nohijos}}</p>
+<p><b>Conyugue:</b> {{miembro.conyugue}}</p>
+<p><b>Fecha de Nacimiento:</b> {{miembro.nacimiento}}</p>
+<p><b>Nivel Académico:</b> {{miembro.nivelAcademico}}</p>
+
+
+
+
+
+<p><b>Dirección:</b> {{miembro.direccion}}</p>
+<p><b>Teléfono:</b> {{miembro.telefono}}</p>
+
+<p><b>Profesión:</b> {{miembro.profesion}}</p>
+<p><b>Lugar de trabajo:</b> {{miembro.trabajo}}</p>
+<p><b>Sociedad:</b> {{miembro.sociedad}}</p>
+<p><b>Teléfono de trabajo:</b> {{miembro.telTrabajo}}</p>
+
+
+
+<p><b>Fecha de Conversión:</b> {{miembro.fechaConversion}}</p>
+<p><b>Bautismo en Agua:</b> {{miembro.bautismoAgua}}</p>
+<p><b>Bautismo Espíritu Santo:</b> {{miembro.bautismoEspiritu}}</p>
+<p><b>Estudios Teológicos:</b> {{miembro.estudiosTeologicos}}</p>
+
+
+<p><b>Observaciones:</b> {{miembro.observaciones}}</p>
+
+</ion-card-content>
+
+</ion-card>
+
+
+<ion-button expand="block" color="warning" (click)="editar()">
+Editar Información
+</ion-button>
+
+</ion-content>

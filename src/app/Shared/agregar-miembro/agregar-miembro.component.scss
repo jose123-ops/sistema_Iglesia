@@ -1,0 +1,35 @@
+.form-container{
+  --padding-start: 40px;
+  --padding-end: 40px;
+}
+
+.form-card{
+  max-width: 900px;
+  margin: auto;
+}
+
+.grid-form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.input-item{
+  --border-radius: 10px;
+  --background: #f8f8f8;
+}
+
+.full{
+  grid-column: span 2;
+}
+
+.textarea{
+  --padding-top: 10px;
+}
+
+.titulo-seccion{
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #444;
+}

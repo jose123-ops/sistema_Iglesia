@@ -1,0 +1,23 @@
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: false,
+
+    template: `
+    <ion-list>
+      <ion-item button (click)="cerrarSesion()">Cerrar sesión</ion-item>
+    </ion-list>
+  `
+})
+export class HeaderComponent  implements OnInit {
+
+   @Input() title!: string;
+
+  constructor() { }
+
+  ngOnInit() {}
+
+}

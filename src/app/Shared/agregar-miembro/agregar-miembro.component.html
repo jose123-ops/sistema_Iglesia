@@ -1,0 +1,195 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Nuevo Miembro</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="form-container">
+
+  <form (ngSubmit)="guardar()" class="form-card">
+
+    <!-- DATOS PERSONALES -->
+
+    <h2 class="titulo-seccion">Datos Personales</h2>
+
+    <!-- NOMBRE SOLO -->
+    <ion-item class="input-item full">
+      <ion-input placeholder="Nombres del miembro" [(ngModel)]="miembro.nombres" name="nombres"></ion-input>
+    </ion-item>
+
+
+    <div class="grid-form">
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Primer apellido" [(ngModel)]="miembro.apellido1" name="apellido1"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Segundo apellido" [(ngModel)]="miembro.apellido2" name="apellido2"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Número de cédula" [(ngModel)]="miembro.cedula" name="cedula"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Lugar y fecha de nacimiento" [(ngModel)]="miembro.nacimiento"
+          name="nacimiento"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-select placeholder="Sociedad" [(ngModel)]="miembro.sociedad" name="sociedad">
+
+          <ion-select-option>Dorcas</ion-select-option>
+          <ion-select-option>Varones</ion-select-option>
+          <ion-select-option>Jovenes</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Nacionalidad" [(ngModel)]="miembro.nacionalidad" name="nacionalidad"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-select placeholder="Estado civil" [(ngModel)]="miembro.estadoCivil" name="estadoCivil">
+
+          <ion-select-option>SOLTERO</ion-select-option>
+          <ion-select-option>CASADO</ion-select-option>
+          <ion-select-option>DIVORCIADO</ion-select-option>
+          <ion-select-option>VIUDO</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+    </div>
+
+
+
+    <!-- INFORMACION FAMILIAR -->
+
+    <h2 class="titulo-seccion">Información Familiar</h2>
+
+    <!-- CONYUGE SOLO -->
+    <ion-item class="input-item full">
+      <ion-input placeholder="Nombre del cónyuge" [(ngModel)]="miembro.conyugue" name="conyugue"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item full">
+      <ion-input placeholder="Número de hijos" [(ngModel)]="miembro.nohijos" name="noHijos"></ion-input>
+    </ion-item>
+
+    <!-- DIRECCION TEXTAREA -->
+    <ion-item class="input-item textarea full">
+      <ion-textarea rows="3" placeholder="Dirección actual" [(ngModel)]="miembro.direccion"
+        name="direccion"></ion-textarea>
+    </ion-item>
+
+    <!-- TELEFONO -->
+    <ion-item class="input-item full">
+      <ion-input placeholder="Teléfono" [(ngModel)]="miembro.telefono" name="telefono"></ion-input>
+    </ion-item>
+
+
+
+    <!-- INFORMACION LABORAL -->
+
+    <h2 class="titulo-seccion">Información Laboral</h2>
+
+    <div class="grid-form">
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Profesión u oficio" [(ngModel)]="miembro.profesion" name="profesion"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Lugar de trabajo" [(ngModel)]="miembro.trabajo" name="trabajo"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Teléfono del trabajo" [(ngModel)]="miembro.telTrabajo" name="telTrabajo"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-select placeholder="Nivel académico" [(ngModel)]="miembro.nivelAcademico" name="nivelAcademico">
+
+          <ion-select-option>Primaria</ion-select-option>
+          <ion-select-option>Secundaria</ion-select-option>
+          <ion-select-option>Técnico</ion-select-option>
+          <ion-select-option>Universitario</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+    </div>
+
+
+
+    <!-- DATOS ESPIRITUALES -->
+
+    <h2 class="titulo-seccion">Datos Espirituales</h2>
+
+    <div class="grid-form">
+
+      <ion-item class="input-item">
+        <ion-label position="stacked">Fecha de Conversión</ion-label>
+        <ion-input type="date" placeholder="Fecha de conversión" [(ngModel)]="miembro.fechaConversion"
+          name="fechaConversion"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-label position="stacked">Bautismo en Agua</ion-label>
+        <ion-input type="date" placeholder="Bautismo en agua" [(ngModel)]="miembro.bautismoAgua"
+          name="bautismoAgua"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-label position="stacked">Bautismo en Espíritu Santo</ion-label>
+        <ion-input type="date" placeholder="Bautismo Espíritu Santo" [(ngModel)]="miembro.bautismoEspiritu"
+          name="bautismoEspiritu"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-input placeholder="Estudios teológicos" [(ngModel)]="miembro.estudiosTeologicos"
+          name="estudiosTeologicos"></ion-input>
+      </ion-item>
+
+    </div>
+
+
+
+    <!-- OBSERVACIONES -->
+
+    <h2 class="titulo-seccion">Observaciones</h2>
+
+    <ion-item class="input-item textarea full">
+      <ion-textarea rows="4" placeholder="Observaciones del miembro" [(ngModel)]="miembro.observaciones"
+        name="observaciones"></ion-textarea>
+    </ion-item>
+
+
+
+    <div class="botones">
+      <div *ngIf="!modoEditar">
+        <ion-button expand="block" color="success" type="submit">
+          Guardar Miembro
+        </ion-button>
+      </div>
+      <div *ngIf="modoEditar">
+        <ion-button expand="block" color="warning" type="submit">
+          Actualizar Miembro
+        </ion-button>
+      </div>
+    </div>
+
+  </form>
+
+</ion-content>

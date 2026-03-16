@@ -1,0 +1,95 @@
+
+<app-header title="Registrar"></app-header>
+
+<ion-content [fullscreen]="true" class="center-content">
+
+  <div class="center-wrapper">
+ <form [formGroup]="form" class="auth-form">
+  <!-- Nombre Iglesia -->
+  <app-custom-input
+    icon="business-outline"
+    [control]="form.controls. nombre"
+    label="Nombre de la Iglesia"
+    type="text">
+  </app-custom-input>
+
+  <div class="validators" *ngIf="form.controls. nombre.touched">
+    <div *ngIf="form.controls. nombre.hasError('required')">
+      Nombre requerido
+    </div>
+    <div *ngIf="form.controls. nombre.hasError('minlength')">
+      Mínimo 3 caracteres
+    </div>
+  </div>
+
+  <!-- Distrito -->
+  <ion-item>
+    <ion-icon name="location-outline" slot="start"></ion-icon>
+    <ion-label>Distrito</ion-label>
+    <ion-select [formControl]="form.controls.distrito">
+      <ion-select-option value="Distrito 4">Distrito 4</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Sector -->
+  <ion-item>
+    <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+    <ion-label>Sector</ion-label>
+    <ion-select [formControl]="form.controls.sector">
+      <ion-select-option value="Sector 1">Sector 1</ion-select-option>
+      <ion-select-option value="Sector 2">Sector 2</ion-select-option>
+      <ion-select-option value="Sector 3">Sector 3</ion-select-option>
+      <ion-select-option value="Sector 4">Sector 4</ion-select-option>
+      <ion-select-option value="Sector 5">Sector 5</ion-select-option>
+      <ion-select-option value="Sector 6">Sector 6</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Correo -->
+  <app-custom-input
+    icon="mail-outline"
+    [control]="form.controls.email"
+    label="Correo Electrónico"
+    type="email">
+  </app-custom-input>
+
+  <div class="validators" *ngIf="form.controls.email.touched">
+    <div *ngIf="form.controls.email.hasError('required')">
+      El correo es requerido
+    </div>
+    <div *ngIf="form.controls.email.hasError('email')">
+      Correo inválido
+    </div>
+  </div>
+
+  <!-- Password -->
+  <app-custom-input
+    icon="lock-closed-outline"
+    [control]="form.controls.password"
+    label="Contraseña"
+    type="password">
+  </app-custom-input>
+
+  <div class="validators" *ngIf="form.controls.password.touched">
+    <div *ngIf="form.controls.password.hasError('required')">
+      Contraseña requerida
+    </div>
+    <div *ngIf="form.controls.password.hasError('minlength')">
+      Mínimo 6 caracteres
+    </div>
+  </div>
+
+  <ion-button
+    expand="block"
+    shape="round"
+    size="large"
+    [disabled]="form.invalid"
+    (click)="registrar()">
+    Registrar
+  </ion-button>
+
+ </form>
+
+  </div>
+
+</ion-content>

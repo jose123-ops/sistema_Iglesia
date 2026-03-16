@@ -1,0 +1,98 @@
+<app-header titulo="Miembros"></app-header>
+<ion-content class="ion-padding contenido-centro">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="11" size-lg="12">
+
+        <ion-card>
+
+          <!-- BUSCADOR -->
+          <ion-searchbar placeholder="Buscar miembro..." (ionInput)="buscar($event)">
+          </ion-searchbar>
+
+          <div class="tabla-container">
+
+            <table class="tabla-miembros">
+
+              <!-- ENCABEZADO -->
+              <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>1er apellido</th>
+                  <th>2do apellido</th>
+                  <th>No Cedula</th>
+                  <th>Dirección</th>
+                  <th>Teléfono</th>
+                  <th>Conversión</th>
+                  <th>Bautismo Agua</th>
+                  <th>Bautismo Espíritu</th>
+                  <th>Observaciones</th>
+                  <th>Acciones</th>
+
+                </tr>
+              </thead>
+
+              <!-- DATOS -->
+              <tbody>
+
+                <tr *ngFor="let miembro of miembrosPaginados">
+
+                  <td>{{miembro.nombres}}</td>
+                  <td>{{miembro.apellido1}}</td>
+                  <td>{{miembro.apellido2}}</td>
+                  <td>{{miembro.cedula}}</td>
+                  <td>{{miembro.direccion}}</td>
+                  <td>{{miembro.telefono}}</td>
+                  <td>{{miembro.fechaConversion}}</td>
+                  <td>{{miembro.bautismoAgua}}</td>
+                  <td>{{miembro.bautismoEspiritu}}</td>
+                  <td>{{miembro.observaciones}}</td>
+             
+
+
+                  <td class="acciones">
+
+                    <ion-button size="small" color="primary" (click)="verMiembro(miembro)">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </ion-button>
+
+                    <ion-button size="small" color="danger">
+                      <ion-icon name="swap-vertical-outline"></ion-icon>
+                    </ion-button>
+
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+            <!-- PAGINACION -->
+            <div class="paginacion">
+
+              <ion-button size="small" (click)="paginaAnterior()" [disabled]="paginaActual === 1">
+                Anterior
+              </ion-button>
+
+              <span>Página {{paginaActual}}</span>
+
+              <ion-button size="small" (click)="siguientePagina()"
+                [disabled]="paginaActual * registrosPorPagina >= miembrosFiltrados.length">
+                Siguiente
+              </ion-button>
+
+            </div>
+
+          </div>
+
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

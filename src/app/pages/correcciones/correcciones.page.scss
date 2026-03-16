@@ -1,0 +1,41 @@
+.barra-superior{
+ display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 0 10px;
+}
+
+.tabla-container{
+  overflow-x: auto;
+}
+
+.tabla-miembros{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-miembros th{
+  background: #f4f4f4;
+  font-weight: bold;
+}
+
+.tabla-miembros th,
+.tabla-miembros td{
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.acciones{
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.paginacion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+

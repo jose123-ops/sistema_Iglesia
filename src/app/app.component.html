@@ -1,3 +1,56 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <ion-menu side="start" contentId="main-content" class="mobile-menu" *ngIf="!isAuthPage">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-text-center">
+      <ion-icon class="avatar-icon" name="person-circle-outline"></ion-icon>
+      <!--<h4>{{User()?.name}}</h4>
+      <h5>{{User()?.Rol}}</h5>-->
+
+      <ion-list>
+        <ion-item routerLink="/admin" (click)=" closeMenu() " class="menu-item">
+          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+          Home
+        </ion-item>
+
+        <ion-item routerLink="/miembros" (click)=" closeMenu() " class="menu-item">
+          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+        Crear Regisro
+        </ion-item>
+        <ion-item routerLink="/asig-rutas" (click)=" closeMenu() " class="menu-item">
+          <ion-icon name="car-outline" slot="start"></ion-icon>
+         traslados
+        </ion-item>
+        <ion-item routerLink="/correcciones" (click)=" closeMenu() " class="menu-item">
+          <ion-icon name="server-outline" slot="start"></ion-icon>
+         correciones
+        </ion-item>
+        <!--<ion-item (click)=" closeMenu() " class="menu-item">
+          <ion-icon name="layers-outline" slot="start"></ion-icon>
+          
+        </ion-item>-->  
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      <ion-buttons>
+       <ion-button expand="full" fill="clear" (click)="confirmLogout()">
+  <ion-icon name="log-out-outline" slot="start"></ion-icon>
+  Cerrar Sesión
+</ion-button>
+      </ion-buttons>
+    </ion-footer>
+  </ion-menu>
+
+  <!-- Contenedor Principal -->
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+
+
+
 </ion-app>

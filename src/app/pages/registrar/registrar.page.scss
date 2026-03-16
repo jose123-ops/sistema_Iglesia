@@ -1,0 +1,58 @@
+
+.center-content {
+  --background: #f4f6f9;
+}
+
+.center-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;   // horizontal
+  align-items: center;       // vertical
+  padding: 20px;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: white;
+}
+
+
+.login-container {
+  --background: #f4f6f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 600px;   // 🔥 MÁS GRANDE
+  padding: 40px;      // 🔥 MÁS ESPACIO
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: white;
+}
+
+.validators {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
