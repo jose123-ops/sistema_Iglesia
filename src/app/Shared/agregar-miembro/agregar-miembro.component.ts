@@ -97,9 +97,6 @@ this.miembro = {...this.miembroE};
 
 const grupo = await this.obtenerNombreGrupo();
 
-console.log("Miembro:", this.miembro);
-console.log("ID:", this.miembro.id);
-
 if(!grupo) return;
 
 try {

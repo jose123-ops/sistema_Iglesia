@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'correcciones',
     loadChildren: () => import('./pages/correcciones/correcciones.module').then( m => m.CorreccionesPageModule)
   },
+  {
+    path: 'movimientos',
+    loadChildren: () => import('./pages/movimientos/movimientos.module').then( m => m.MovimientosPageModule)
+  },
 
 ];
 
