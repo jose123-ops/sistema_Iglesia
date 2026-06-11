@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Traslado de Miembro</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="stacked">
+      Iglesia destino
+    </ion-label>
+
+    <ion-select
+      [(ngModel)]="traslado.iglesiaDestino">
+
+      <ion-select-option
+        *ngFor="let iglesia of iglesias"
+        [value]="iglesia.nombre">
+
+        {{ iglesia.nombre }}
+
+      </ion-select-option>
+
+      <ion-select-option value="otra">
+        Otra iglesia
+      </ion-select-option>
+
+    </ion-select>
+
+  </ion-item>
+
+  <ion-item *ngIf="traslado.iglesiaDestino === 'otra'">
+
+    <ion-label position="stacked">
+      Nombre de la iglesia
+    </ion-label>
+
+    <ion-input
+      [(ngModel)]="traslado.otraIglesia">
+    </ion-input>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label position="stacked">
+      Motivo del traslado
+    </ion-label>
+
+    <ion-textarea
+      [(ngModel)]="traslado.motivo">
+    </ion-textarea>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label position="stacked">
+      Fecha
+    </ion-label>
+
+    <ion-input
+      type="date"
+      [(ngModel)]="traslado.fecha">
+    </ion-input>
+
+  </ion-item>
+
+  <ion-button
+    expand="block"
+    color="success"
+    (click)="guardar()">
+
+    Trasladar
+
+  </ion-button>
+
+</ion-content>

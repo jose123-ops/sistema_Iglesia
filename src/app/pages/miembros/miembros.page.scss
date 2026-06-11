@@ -39,3 +39,28 @@
   margin-top: 15px;
 }
 
+.card-resumen {
+  margin: 4px;
+  text-align: center;
+}
+
+.card-resumen ion-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 5px 5px;
+}
+
+.card-resumen ion-card-title {
+  font-size: 3rem; /* Tamaño grande */
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.card-resumen ion-card-content {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  padding-bottom: 15px;
+}

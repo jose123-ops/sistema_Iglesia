@@ -7,6 +7,7 @@ import { VermiembroComponent } from 'src/app/Shared/vermiembro/vermiembro.compon
 import { AlertController } from '@ionic/angular';
 
 import jsPDF from 'jspdf';
+import { TrasladarMiembroComponent } from 'src/app/Shared/trasladar-miembro/trasladar-miembro.component';
 
 @Component({
   selector: 'app-miembros',
@@ -20,6 +21,9 @@ export class MiembrosPage implements OnInit {
   miembrosFiltrados: any[] = [];
   paginaActual = 1;
   registrosPorPagina = 5;
+  totalDorcas = 0;
+  totalJovenes = 0;
+  totalVarones = 0;
 
   constructor(
     private modalCtrl: ModalController,
@@ -68,7 +72,8 @@ export class MiembrosPage implements OnInit {
 
     const modal = await this.modalCtrl.create({
       component: AgregarMiembroComponent,
-      cssClass: 'modal-miembro'
+      cssClass: 'modal-miembro',
+        backdropDismiss: false
     });
 
     await modal.present();
@@ -104,6 +109,7 @@ export class MiembrosPage implements OnInit {
     }));
 
     this.miembrosFiltrados = [...this.miembros];
+    this.calcularTotales();
 
   }
 
@@ -416,4 +422,158 @@ export class MiembrosPage implements OnInit {
     };
 
   }
+
+  calcularTotales() {
+
+  this.totalDorcas = this.miembros.filter(m =>
+    this.normalizarTexto(m.sociedad) === 'dorcas'
+  ).length;
+
+  this.totalJovenes = this.miembros.filter(m =>
+    this.normalizarTexto(m.sociedad) === 'jovenes'
+  ).length;
+
+  this.totalVarones = this.miembros.filter(m =>
+    this.normalizarTexto(m.sociedad) === 'varones'
+  ).length;
+
+}
+
+  normalizarTexto(texto: string): string {
+  return (texto || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+async abrirModalTraslado(miembro:any){
+
+  const datos = await this.obtenerDatosIglesia();
+
+  if(!datos) return;
+
+  const iglesiaActual = datos['nombre'];
+
+  const iglesias = await this.obtenerIglesias();
+
+  const destinos = iglesias.filter(
+    (i:any) => i.nombre !== iglesiaActual
+  );
+
+  const modal = await this.modalCtrl.create({
+
+    component: TrasladarMiembroComponent,
+
+    componentProps:{
+      iglesias: destinos
+    },
+
+    backdropDismiss:false
+
+  });
+
+  await modal.present();
+
+  const { data } = await modal.onDidDismiss();
+
+  if(data){
+
+    await this.realizarTraslado(
+      miembro,
+      data.destino,
+      data.motivo,
+      data.fecha
+    );
+
+  }
+
+}
+
+async obtenerIglesias() {
+
+  const ref = collection(this.firestore, 'Usuario_iglesias');
+
+  const snap = await getDocs(ref);
+
+  return snap.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+
+}
+
+async realizarTraslado(
+  miembro:any,
+  destino:string,
+  motivo:string,
+  fecha:string
+){
+
+  const datos = await this.obtenerDatosIglesia();
+
+  if(!datos) return;
+
+  const origen = datos['nombre'];
+
+  // REGISTRO DE SALIDA EN IGLESIA ORIGEN
+  await addDoc(
+    collection(this.firestore, `movimientos/${origen}/historial`),
+    {
+      ...miembro,
+      tipoMovimiento: 'Salida',
+      iglesiaOrigen: origen,
+      iglesiaDestino: destino,
+      fechaMovimiento: fecha,
+      motivoMovimiento: motivo
+    }
+  );
+
+  // REGISTRO DE ENTRADA EN IGLESIA DESTINO
+  await addDoc(
+    collection(this.firestore, `movimientos/${destino}/historial`),
+    {
+      ...miembro,
+      tipoMovimiento: 'Entrada',
+      iglesiaOrigen: origen,
+      iglesiaDestino: destino,
+      fechaMovimiento: fecha,
+      motivoMovimiento: motivo
+    }
+  );
+
+  // DATOS DEL MIEMBRO A TRASLADAR
+  const nuevoMiembro = {
+    ...miembro,
+    iglesiaOrigen: origen,
+    fechaTraslado: fecha,
+    motivoTraslado: motivo
+  };
+
+  delete nuevoMiembro.id;
+
+  // AGREGAR A IGLESIA DESTINO
+  const refDestino = collection(
+    this.firestore,
+    `miembros/${destino}/lista`
+  );
+
+  await addDoc(refDestino, nuevoMiembro);
+
+  // ELIMINAR DE IGLESIA ORIGEN
+  const refOrigen = doc(
+    this.firestore,
+    `miembros/${origen}/lista/${miembro.id}`
+  );
+
+  await deleteDoc(refOrigen);
+
+  // ACTUALIZAR TABLA
+  this.miembros = this.miembros.filter(
+    m => m.id !== miembro.id
+  );
+
+  this.miembrosFiltrados = [...this.miembros];
+
+}
 }

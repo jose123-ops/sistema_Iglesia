@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { CustomInputComponent } from './custom-input/custom-input.component';
 import { AgregarMiembroComponent } from './agregar-miembro/agregar-miembro.component';
 import { VermiembroComponent } from './vermiembro/vermiembro.component';
+import { TrasladarMiembroComponent } from './trasladar-miembro/trasladar-miembro.component';
 
 
 
@@ -15,14 +16,17 @@ import { VermiembroComponent } from './vermiembro/vermiembro.component';
       CustomInputComponent,
       AgregarMiembroComponent,
       VermiembroComponent
-  ],
+  ,TrasladarMiembroComponent  
+],
+
   exports: [
   HeaderComponent,
     ReactiveFormsModule,
     FormsModule,
     CustomInputComponent ,
    AgregarMiembroComponent,
-   VermiembroComponent
+   VermiembroComponent,
+   TrasladarMiembroComponent
  
   ],
 

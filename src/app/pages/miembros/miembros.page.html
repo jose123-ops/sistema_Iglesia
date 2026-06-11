@@ -2,12 +2,61 @@
 
 <ion-content class="ion-padding contenido-centro">
 
+<ion-grid>
+  <ion-row>
+
+    <ion-col size="6" size-md="3">
+      <ion-card color="dark" class="card-resumen">
+        <ion-card-header>
+          <ion-card-title>{{ miembros.length }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Total Miembros
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6" size-md="3">
+      <ion-card color="primary" class="card-resumen">
+        <ion-card-header>
+          <ion-card-title>{{ totalDorcas }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Dorcas
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6" size-md="3">
+      <ion-card color="success" class="card-resumen">
+        <ion-card-header>
+          <ion-card-title>{{ totalJovenes }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Jovenes
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6" size-md="3">
+      <ion-card color="warning" class="card-resumen">
+        <ion-card-header>
+          <ion-card-title>{{ totalVarones }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Varones
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="11" size-lg="12">
 
         <ion-card>
-
           <!-- BOTON AGREGAR -->
           <div class="barra-superior">
 
@@ -71,7 +120,7 @@
                       <ion-icon name="eye-outline"></ion-icon>
                     </ion-button>
 
-                    <ion-button size="small" color="danger">
+                    <ion-button size="small" color="danger"  (click)="abrirModalTraslado(miembro)">
                       <ion-icon name="swap-vertical-outline"></ion-icon>
                     </ion-button>
 

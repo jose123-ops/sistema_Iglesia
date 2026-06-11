@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { collection, Firestore, getDocs, query, where } from '@angular/fire/firestore';
+import { collection, Firestore, getDocs, query, where,addDoc,deleteDoc,doc } from '@angular/fire/firestore';
 import { AlertController, ModalController } from '@ionic/angular';
 import { AgregarMiembroComponent } from 'src/app/Shared/agregar-miembro/agregar-miembro.component';
 import { VermiembroComponent } from 'src/app/Shared/vermiembro/vermiembro.component';
@@ -84,6 +84,8 @@ export class CorreccionesPage implements OnInit {
     }));
 
     this.miembrosFiltrados = [...this.miembros];
+    console.log('Ruta cortados:', `miembros_cortados/${grupo}/lista`);
+
 
   }
 
@@ -126,5 +128,99 @@ export class CorreccionesPage implements OnInit {
     await modal.present();
 
   }
+
+  async restaurarMiembro(miembro:any){
+
+  const alert = await this.alertCtrl.create({
+
+    header:'Restaurar miembro',
+
+    message:`¿Desea restaurar a ${miembro.nombres}?`,
+
+    buttons:[
+
+      {
+        text:'Cancelar',
+        role:'cancel'
+      },
+
+      {
+        text:'Restaurar',
+
+        handler: async()=>{
+
+          await this.confirmarRestauracion(miembro);
+
+        }
+
+      }
+
+    ]
+
+  });
+
+  await alert.present();
+
+}
+
+async confirmarRestauracion(miembro:any){
+
+  const datos = await this.obtenerDatosIglesia();
+
+  if(!datos) return;
+
+  const grupo = datos['nombre'];
+
+  const miembroRestaurado = {
+
+    ...miembro,
+
+    estado:'activo',
+
+    observaciones: miembro.observaciones
+      ? miembro.observaciones + ' | Restaurado'
+      : 'Restaurado'
+
+  };
+
+  delete miembroRestaurado.id;
+
+  // Regresar a miembros
+  const refMiembros = collection(
+    this.firestore,
+    `miembros/${grupo}/lista`
+  );
+
+  await addDoc(refMiembros, miembroRestaurado);
+
+  // Eliminar de cortados
+  const refCortado = doc(
+    this.firestore,
+    `miembros_cortados/${grupo}/lista/${miembro.id}`
+  );
+
+  await deleteDoc(refCortado);
+
+  // Quitar de la tabla
+  this.miembros = this.miembros.filter(
+    m => m.id !== miembro.id
+  );
+
+  this.miembrosFiltrados = [...this.miembros];
+
+
+  await addDoc(
+  collection(this.firestore, `movimientos/${grupo}/historial`),
+  {
+    ...miembro,
+    tipoMovimiento:'Restauración',
+    fechaMovimiento:new Date(),
+    observacion:'Miembro restaurado'
+  }
+);
+
+}
+
+
 
 }

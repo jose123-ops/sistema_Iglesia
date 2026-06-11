@@ -1,1 +1,69 @@
-<app-header titulo="Miembros"></app-header>
+<app-header titulo="Historial de Movimientos"></app-header>
+
+<ion-content>
+
+  <ion-searchbar
+    placeholder="Buscar movimiento"
+    (ionInput)="buscar($event)">
+  </ion-searchbar>
+
+  <div class="tabla-container">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Miembro</th>
+          <th>Movimiento</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Fecha</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+        *ngFor="let item of movimientosPaginados">
+
+          <td>
+            {{item.nombres}}
+            {{item.apellido1}}
+          </td>
+
+          <td>
+
+            <ion-badge
+              [color]="item.tipoMovimiento === 'Entrada'
+              ? 'success'
+              : 'warning'">
+
+              {{item.tipoMovimiento}}
+
+            </ion-badge>
+
+          </td>
+
+          <td>
+            {{item.iglesiaOrigen}}
+          </td>
+
+          <td>
+            {{item.iglesiaDestino}}
+          </td>
+
+          <td>
+            {{item.fechaMovimiento}}
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</ion-content>
